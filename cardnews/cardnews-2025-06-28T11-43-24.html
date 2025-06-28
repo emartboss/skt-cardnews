@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK텔레콤 카드뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+
+        .card-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #EA1917 0%, #FF4444 100%);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(234, 25, 23, 0.3);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .card.white {
+            background: white;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card.dark {
+            background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+            color: white;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #EA1917;
+            font-size: 12px;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+
+        .card.white h2 {
+            color: #EA1917;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #FFD700;
+        }
+
+        .card.white .highlight {
+            background: rgba(234, 25, 23, 0.1);
+            border-left-color: #EA1917;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .cta-button {
+            background: #FFD700;
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            text-align: left;
+            margin: 20px 0;
+            list-style: none;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <!-- 카드 1: 타이틀 -->
+        <div class="card">
+            <div class="card-number">1/7</div>
+            <div class="logo">SK텔레콤</div>
+            <h1>🚀 SK텔레콤<br>최신 뉴스</h1>
+            <p>SK텔레콤 해킹 조사 막바지</p>
+        </div>
+
+        <!-- 카드 2: 주요 내용 -->
+        <div class="card white">
+            <div class="card-number">2/7</div>
+            <h2>📱 주요 발표</h2>
+            <p>SK텔레콤 해킹 조사 막바지</p>
+            <div class="highlight">
+                <strong>핵심 포인트</strong><br>
+                30일 민관합동조사단 최종 결과 발표
+            </div>
+        </div>
+
+        <!-- 카드 3: 상세 정보 -->
+        <div class="card dark">
+            <div class="card-number">3/7</div>
+            <h2>🔍 상세 분석</h2>
+            <p>이번 발표의 주요 특징:</p>
+            <ul>
+                <li>• 30일 민관합동조사단 최종 결과 발표</li><li>• 과기정통부 과태료 처분 불가피</li><li>• 개인정보위 과징금 부과 예정</li>
+            </ul>
+        </div>
+
+        <!-- 카드 4: 통계 -->
+        <div class="card">
+            <div class="card-number">4/7</div>
+            <h2>📊 주요 지표</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">1위</span>
+                    <span class="stat-label">국내 통신사</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">5G 커버리지</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2,800만</span>
+                    <span class="stat-label">가입자 수</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24시간</span>
+                    <span class="stat-label">고객 지원</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 카드 5: 혜택 -->
+        <div class="card white">
+            <div class="card-number">5/7</div>
+            <div class="icon">🎁</div>
+            <h2>고객 혜택</h2>
+            <p>새로운 서비스 출시를 기념하여 다양한 혜택을 제공합니다.</p>
+            <div class="highlight">
+                <strong>특별 혜택</strong><br>
+                • 첫 달 무료 체험<br>
+                • 데이터 2배 증정<br>
+                • 프리미엄 서비스 할인
+            </div>
+        </div>
+
+        <!-- 카드 6: 미래 전망 -->
+        <div class="card dark">
+            <div class="card-number">6/7</div>
+            <div class="icon">🌟</div>
+            <h2>미래 계획</h2>
+            <p>통신보안 관리 체계 강화 필요</p>
+            <div class="highlight">
+                <strong>2025년 목표</strong><br>
+                디지털 전환을 가속화하고 새로운 성장 동력을 확보합니다.
+            </div>
+        </div>
+
+        <!-- 카드 7: 마무리 -->
+        <div class="card">
+            <div class="card-number">7/7</div>
+            <div class="logo">SK텔레콤</div>
+            <h2>함께 만들어가는<br>디지털 미래</h2>
+            <p>SK텔레콤과 함께<br>더 나은 내일을 경험하세요</p>
+            <a href="#" class="cta-button">자세히 보기</a>
+            <div style="margin-top: 30px; font-size: 12px; opacity: 0.8;">
+                #SK텔레콤 #5G #AI #혁신기술 #디지털미래
+            </div>
+        </div>
+    </div>
+</body>
+</html>
