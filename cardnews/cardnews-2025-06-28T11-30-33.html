@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK텔레콤 카드뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .news-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #EA1917 0%, #FF4444 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .card-content {
+            padding: 25px 20px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #EA1917;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .main-headline {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(234, 25, 23, 0.1);
+            border-left: 4px solid #EA1917;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #EA1917;
+            margin-bottom: 8px;
+        }
+
+        .highlight-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .key-points {
+            margin: 20px 0;
+        }
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .point-icon {
+            color: #EA1917;
+            font-weight: bold;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stats-box {
+            border: 2px solid #EA1917;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+
+        .stats-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #EA1917;
+            display: block;
+        }
+
+        .stats-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .warning-box {
+            background: #FFF3CD;
+            border: 1px solid #F0AD4E;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-icon {
+            color: #F0AD4E;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .warning-title {
+            font-weight: bold;
+            color: #8A6D3B;
+            margin-bottom: 8px;
+        }
+
+        .warning-content {
+            font-size: 13px;
+            color: #8A6D3B;
+            line-height: 1.4;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            background: #EA1917;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .timeline-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer-section {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-top: 15px;
+        }
+
+        .footer-date {
+            color: #EA1917;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .footer-source {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .big-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #EA1917;
+        }
+
+        @media (max-width: 480px) {
+            .news-container {
+                margin: 0;
+                max-width: 100%;
+            }
+            
+            .card {
+                margin-bottom: 10px;
+                border-radius: 15px;
+            }
+            
+            .card-content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="news-container">
+        
+        <!-- 카드 1: 타이틀 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">1/5</div>
+                <div class="card-title">📱 SK텔레콤 뉴스</div>
+                <div class="card-subtitle">SK텔레콤 해킹 조사 막바지</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">📱</div>
+                </div>
+                <div class="main-headline">
+                    <span class="big-number">SK텔레콤 해킹 조사 막바지</span>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-title">주요 뉴스</div>
+                    <div class="highlight-content">상세한 내용을 아래 카드에서 확인하세요</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">📅 2025. 6. 28.</div>
+            </div>
+        </div>
+
+        <!-- 카드 2: 핵심 포인트 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">2/5</div>
+                <div class="card-title">🔍 핵심 포인트</div>
+                <div class="card-subtitle">주요 내용 정리</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">📋</div>
+                </div>
+                
+                <div class="key-points">
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>30일 민관합동조사단 최종 결과 발표</span>
+                        </div>
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>과기정통부 과태료 처분 불가피</span>
+                        </div>
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>개인정보위 과징금 부과 예정</span>
+                        </div>
+                    
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">주요 내용</div>
+                    <div class="highlight-content">SK텔레콤 해킹 조사 막바지</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">📅 2025. 6. 28.</div>
+            </div>
+        </div>
+
+        <!-- 카드 3: 핵심 숫자 강조 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">3/5</div>
+                <div class="card-title">📊 핵심 지표</div>
+                <div class="card-subtitle">주요 수치 정보</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">💰</div>
+                </div>
+                <div class="main-headline">관련 업계는 <span class="big-number">중요한 변화</span>가 예상된다고 분석했습니다.</div>
+                
+                <div class="stats-grid">
+                    <div class="stats-box">
+                        <span class="stats-number">최대 3천만원</span>
+                        <div class="stats-label">과태료 한도</div>
+                    </div>
+                    <div class="stats-box">
+                        <span class="stats-number">24시간</span>
+                        <div class="stats-label">신고 의무 기한</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">추가 정보</div>
+                    <div class="highlight-content">세부 내용은 공식 발표를 통해 확인할 수 있습니다</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">📅 2025. 6. 28.</div>
+            </div>
+        </div>
+
+        <!-- 카드 4: 의미와 전망 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">4/5</div>
+                <div class="card-title">🌟 의미 & 전망</div>
+                <div class="card-subtitle">향후 전망 분석</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">🔮</div>
+                </div>
+                <div class="main-headline"><span class="big-number">통신보안 관리 체계 강화 필요</span></div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">전망 요약</div>
+                    <div class="highlight-content">업계 전문가들은 이번 발표가 향후 정책 방향에 중요한 영향을 미칠 것으로 분석했습니다</div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title">
+                        <span class="warning-icon">⚠️</span> 주목할 점
+                    </div>
+                    <div class="warning-content">관련 업계의 지속적인 관심과 추가 발표가 예상됩니다</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">📅 2025. 6. 28.</div>
+            </div>
+        </div>
+
+        <!-- 카드 5: 개인정보보호위원회 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">5/7</div>
+                <div class="card-title">개인정보보호위원회</div>
+                <div class="card-subtitle">과기정통부와 지속 소통</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">🏛️</div>
+                </div>
+                <div class="main-headline">개인정보위 관계자는 <span class="big-number">"과기정통부와 계속 소통하면서 조사를 진행 중"</span> 이라고 밝혔습니다.</div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">조사 현황</div>
+                    <div class="highlight-content">"민관합동조사단의 최종 조사 결과 발표 중 개인정보유출 부분에 있어 몰랐던 부분은 없을 것"</div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title">
+                        <span class="warning-icon">⚠️</span> 과징금 규모
+                    </div>
+                    <div class="warning-content">"과징금 규모는 일반적으로 0.9~1.5% 수준으로 부과되고 있으나 SK텔레콤은 이번 조사 중이기에 확답할 수 없다"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 카드 6: 향후 전망 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">6/7</div>
+                <div class="card-title">향후 전망</div>
+                <div class="card-subtitle">법적 처분 및 후속 조치</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">🔮</div>
+                </div>
+                <div class="main-headline">통신보안 관리 체계 강화 필요</div>
+                
+                <div class="key-points">
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>30일 민관합동조사단 최종 결과 발표</span>
+                        </div>
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>과기정통부 과태료 처분 불가피</span>
+                        </div>
+                    
+                        <div class="point-item">
+                            <span class="point-icon">▶</span>
+                            <span>개인정보위 과징금 부과 예정</span>
+                        </div>
+                    
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">주요 관전 포인트</div>
+                    <div class="highlight-content">30일 발표되는 민관합동조사단 결과와 이후 과기정통부의 최종 처분 결정</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">쿠키뉴스 | 2025.06.28</div>
+            </div>
+        </div>
+
+        <!-- 카드 7: 마무리 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">7/7</div>
+                <div class="card-title">SK텔레콤과 함께</div>
+                <div class="card-subtitle">신뢰할 수 있는 디지털 미래</div>
+            </div>
+            <div class="card-content">
+                <div class="logo-section">
+                    <div class="logo">SK텔레콤</div>
+                </div>
+                <div class="main-headline">더 안전하고 신뢰할 수 있는<br>디지털 서비스를 제공하겠습니다</div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">SK텔레콤 해킹 조사 막바지</div>
+                    <div class="highlight-content">투명한 조사 과정을 통해 고객 신뢰 회복에 최선을 다하겠습니다</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-date">📅 2025. 6. 28.</div>
+                <div class="footer-source">#SK텔레콤 #해킹조사 #민관합동조사단 #과태료</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
