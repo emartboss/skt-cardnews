@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK텔레콤 카드뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .card-container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 45px 35px;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #333;
+            background: white;
+        }
+        
+        .content h2 {
+            color: #e91e63;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer .date {
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .footer .logo {
+            margin-top: 10px;
+            font-weight: 700;
+            color: #e91e63;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .card-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 30px 25px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="header">
+            <h1>📱 SK텔레콤</h1>
+            <div class="subtitle">카드뉴스</div>
+        </div>
+        <div class="content">
+            ## 카드뉴스용 콘텐츠<br><br><br><br>### 1. 임팩트 헤드라인<br><br>**SK텔레콤 해킹 처벌 임박**<br><br><br><br>### 2. 핵심 포인트 3개<br><br>- **30일 민관조사단 최종결과 발표**<br><br>- **24시간 내 신고의무 위반으로 과태료**  <br><br>- **개인정보위 과징금도 추가 부과 예상**<br><br><br><br>### 3. 의미/전망<br><br>**통신사 보안관리 강화 신호탄**<br><br><br><br>---<br><br><br><br>**추가 설명:**<br><br>- 과기정통부는 SK텔레콤의 해킹사고 늦은 신고에 대해 과태료(최대 3천만원) 부과 예정<br><br>- 개인정보보호위원회도 매출액의 0.9~1.5% 수준 과징금 검토 중<br><br>- 7월 4일경 위약금 면제 여부도 결정 발표 예정
+        </div>
+        <div class="footer">
+            <div class="date">📅 2025년 6월 28일 토요일</div>
+            <div class="logo">SK TELECOM NEWS</div>
+        </div>
+    </div>
+</body>
+</html>
