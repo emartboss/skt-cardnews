@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK텔레콤 카드뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .card-slider {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+            background: linear-gradient(135deg, #EA1917 0%, #FF4444 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .card.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .card.white {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #333;
+        }
+
+        .card.dark {
+            background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+            color: white;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #EA1917;
+            font-size: 14px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.3);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #FFD700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card.white h2 {
+            color: #EA1917;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border-left: 6px solid #FFD700;
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        .card.white .highlight {
+            background: rgba(234, 25, 23, 0.1);
+            border-left-color: #EA1917;
+        }
+
+        .key-points {
+            text-align: left;
+            margin: 30px 0;
+            position: relative;
+            z-index: 2;
+            list-style: none;
+            max-width: 500px;
+        }
+
+        .key-points li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .key-points li::before {
+            content: '▶';
+            color: #FFD700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        .card.white .key-points li::before {
+            color: #EA1917;
+        }
+
+        .icon {
+            font-size: 64px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-info {
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.3);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .card-indicator {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: #FFD700;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+            
+            .key-points li {
+                font-size: 16px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-slider">
+        <!-- 카드 1: 타이틀 -->
+        <div class="card active" data-card="1">
+            <div class="card-number">1/5</div>
+            <div class="logo">SK텔레콤</div>
+            <h1>📱 SK텔레콤<br>최신 뉴스</h1>
+            <div class="highlight">
+                <strong>SKT 해킹 조사 막바지, 과태료 부과 예상</strong>
+            </div>
+            <p>혁신적인 기술과 서비스로<br>디지털 미래를 선도합니다</p>
+        </div>
+
+        <!-- 카드 2: 주요 내용 -->
+        <div class="card white" data-card="2">
+            <div class="card-number">2/5</div>
+            <div class="icon">📰</div>
+            <h2>주요 내용</h2>
+            <div class="highlight">
+                <strong>핵심 뉴스</strong><br>
+                SKT 해킹 조사 막바지, 과태료 부과 예상
+            </div>
+            <p>상세한 내용을 다음 카드에서 확인해보세요.</p>
+        </div>
+
+        <!-- 카드 3: 핵심 포인트 -->
+        <div class="card dark" data-card="3">
+            <div class="card-number">3/5</div>
+            <div class="icon">🔍</div>
+            <h2>핵심 포인트</h2>
+            <ul class="key-points">
+                <li>민관합동조사단 최종 결과 30일 발표</li><li>24시간 내 신고 의무 위반으로 과태료 불가피</li><li>개인정보위 과징금 매출액 0.9~1.5% 수준</li>
+            </ul>
+        </div>
+
+        <!-- 카드 4: 의미와 전망 -->
+        <div class="card" data-card="4">
+            <div class="card-number">4/5</div>
+            <div class="icon">🌟</div>
+            <h2>의미 & 전망</h2>
+            <div class="highlight">
+                <strong>주요 시사점</strong><br>
+                SKT 위약금 면제 여부 7월 4일 결정
+            </div>
+            <p>SK텔레콤의 지속적인 혁신과<br>발전이 기대됩니다.</p>
+        </div>
+
+        <!-- 카드 5: 마무리 -->
+        <div class="card white" data-card="5">
+            <div class="card-number">5/5</div>
+            <div class="logo">SK텔레콤</div>
+            <h2>SK텔레콤과 함께<br>미래를 만들어가세요</h2>
+            <p>더 나은 디지털 경험을<br>제공하겠습니다</p>
+            <div class="footer-info">
+                📅 2025. 6. 28.<br>
+                #SK텔레콤 #뉴스 #혁신기술
+            </div>
+        </div>
+
+        <!-- 카드 인디케이터 -->
+        <div class="card-indicator">
+            <div class="indicator-dot active"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+        </div>
+
+        <!-- 네비게이션 버튼 -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousCard()" disabled>◀ 이전</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextCard()">다음 ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentCard = 1;
+        const totalCards = 5;
+
+        function showCard(cardNumber) {
+            // 모든 카드 숨기기
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // 해당 카드 보이기
+            document.querySelector(`[data-card="${cardNumber}"]`).classList.add('active');
+            
+            // 인디케이터 업데이트
+            document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === cardNumber);
+            });
+            
+            // 버튼 상태 업데이트
+            document.getElementById('prevBtn').disabled = cardNumber === 1;
+            document.getElementById('nextBtn').disabled = cardNumber === totalCards;
+            
+            if (cardNumber === totalCards) {
+                document.getElementById('nextBtn').textContent = '완료 ✓';
+            } else {
+                document.getElementById('nextBtn').textContent = '다음 ▶';
+            }
+        }
+
+        function nextCard() {
+            if (currentCard < totalCards) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        }
+
+        function previousCard() {
+            if (currentCard > 1) {
+                currentCard--;
+                showCard(currentCard);
+            }
+        }
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextCard();
+            } else if (e.key === 'ArrowLeft') {
+                previousCard();
+            }
+        });
+
+        // 터치 스와이프 지원
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            if (startX - endX > threshold) {
+                nextCard(); // 왼쪽 스와이프 = 다음 카드
+            } else if (endX - startX > threshold) {
+                previousCard(); // 오른쪽 스와이프 = 이전 카드
+            }
+        }
+    </script>
+</body>
+</html>
