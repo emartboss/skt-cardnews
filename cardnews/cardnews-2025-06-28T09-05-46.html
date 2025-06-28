@@ -1,0 +1,377 @@
+HTML에서 SK텔레콤 해킹 조사 관련 기사를 추출하여 7장의 카드뉴스를 생성하겠습니다.
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK텔레콤 해킹 조사 카드뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .card-container {
+            max-width: 400px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #e60012, #ff4757);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .card-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-content {
+            padding: 30px 25px;
+        }
+
+        .main-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffe6e6 0%, #ffe6e6 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #e60012;
+            font-weight: 600;
+        }
+
+        .key-point {
+            background: #f8f9ff;
+            border-left: 4px solid #e60012;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-point-title {
+            font-weight: bold;
+            color: #e60012;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .key-point-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+
+        .timeline-date {
+            background: #e60012;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: #e60012;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e60012;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e60012;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #e60012;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card-container {
+                margin-bottom: 20px;
+            }
+            
+            .card-content {
+                padding: 20px 20px;
+            }
+            
+            .main-text {
+                font-size: 15px;
+            }
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #e60012;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-title {
+            color: #e60012;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-title::before {
+            content: "⚠️";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 카드 1: 제목 -->
+<div class="card-container">
+    <div class="card-header">
+        <div class="card-number">1/7</div>
+        <div class="card-title">SK텔레콤 해킹 조사</div>
+        <div class="card-subtitle">민관합동조사단 최종 발표 임박</div>
+    </div>
+    <div class="card-content">
+        <div class="icon">📱</div>
+        <div class="main-text">
+            SK텔레콤 해킹 사태 관련 <span class="highlight">민관합동조사단의 최종 조사 결과</span>가 30일 발표됩니다.
+        </div>
+        <div class="key-point">
+            <div class="key-point-title">주요 쟁점</div>
+            <div class="key-point-text">과기정통부의 과태료 처분 여부와 SK텔레콤 위약금 면제 결정</div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="logo">쿠키뉴스</span> | 2025.06.28
+    </div>
+</div>
+
+<!-- 카드 2: 조사 일정 -->
+<div class="card-container">
+    <div class="card-header">
+        <div class="card-number">2/7</div>
+        <div class="card-title">조사 결과 발표 일정</div>
+        <div class="card-subtitle">유상임 장관 국정감사 답변</div>
+    </div>
+    <div class="card-content">
+        <div class="icon">📅</div>
+        <div class="main-text">
+            유상임 과기정통부 장관이 27일 국회에서 밝힌 주요 일정
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">6월 30일</div>
+            <div class="timeline-content">민관합동조사단 최종 조사 결과 발표</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">7월 4일</div>
+            <div class="timeline-content">SK텔레콤 위약금 면제 여부 정부 입장 발표</div>
+        </div>
+        <div class="warning-box">
+            <div class="warning-title">로펌 법률 검토</div>
+            <div class="key-point-text">조사단 결과를 바탕으로 로펌에 법률 검토를 의뢰한 후 위약금 문제를 최종 판단</div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="logo">쿠키뉴스</span> | 2025.06.28
+    </div>
+</div>
+
+<!-- 카드 3: 과태료 처분 -->
+<div class="card-container">
+    <div class="card-header">
+        <div class="card-number">3/7</div>
+        <div class="card-title">과태료 처분 불가피</div>
+        <div class="card-subtitle">24시간 신고 의무 위반</div>
+    </div>
+    <div class="card-content">
+        <div class="icon">⚖️</div>
+        <div class="main-text">
+            관련 업계는 <span class="highlight">SK텔레콤의 과태료 처분이 피할 수 없을 것</span>으로 전망하고 있습니다.
+        </div>
+        <div class="key-point">
+            <div class="key-point-title">위반 사항</div>
+            <div class="key-point-text">정보통신서비스 제공자는 침해사고 발생을 알게 된 때부터 24시간 이내에 과기정통부 장관 또는 KISA에 신고해야 함</div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">최대 3천만원</span>
+                <div class="stat-label">과태료 한도</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24시간</span>
+                <div class="stat-label">신고 의무 기한</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="logo">쿠키뉴스</span> | 2025.06.28
+    </div>
+</div>
+
+<!-- 카드 4: 개인정보보호 과징금 -->
+<div class="card-container">
+    <div class="card-header">
+        <div class="card-number">4/7</div>
+        <div class="card-title">개인정보보호 과징금</div>
+        <div class="card-subtitle">매출액 최대 3% 부과 가능</div>
+    </div>
+    <div class="card-content">
+        <div class="icon">💰</div>
+        <div class="main-text">
+            개인정보보호법상 <span class="highlight">전체 매출액의 최대 3%</span>를 과징금 한도로 규정
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">17조 9,406억원</span>
+                <div class="stat-label">2024년 SK텔레콤 매출액</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">0.9~1.5%</span>
+                <div class="stat-label">일반적 과징금 수준</div>
+            </div>
+        </div>
+        <div class="key-point">
+            <div class="key-point-title">산정 기준</div>
+            <div class="key-point-text">유출사안과 관련이 없는 매출액의 경우 산정 기준에서 제외할 수 있음</div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="logo">쿠키뉴스</span> | 2025.06.28
+    </div>
+</div>
+
+<!-- 카드 5: 개인정보위 입장 -->
+<div class="card-container">
+    <div class="card-header">
+        <div class="card-number">5/7</div>
+        <div class="card-title">개인정보보호위원회</div>
+        <div class="card-subtitle">과기정통부와 지속 소통</div>
+    </div>
+    <div class="card-content">
+        <div class="icon">🏛️</div>
+        <div class="main-text">
+            개인정보위 관계자는 <span class="highlight">"과기정통부와 계속 소통하면서 조사를 진행 중"</span>이라고 밝혔습니다.
+        </div>
+        <div class="key-point">
+            <div class="key-point-title">조사 현황</div>
+            <div class="key-point-text">"민관합동조사단의 최종 조사 결과 발표 중 개인정보 유출 부분에 있어 몰랐던 부분은 없을 것"</div>
+        </div>
+        <div class="warning-box">
+            <div class="warning-title">과징금 규모</div>
+            <div class="key-point-text">"과징금 규모는 일반적으로 0.9~1.5% 수준으로 부과되고 있으나 SK텔레콤은 아직 조사 중이기에 확답할 수 없다"</div>
+        </div>
+    </div>
+    <div class
